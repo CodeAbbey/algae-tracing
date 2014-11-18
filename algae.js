@@ -76,7 +76,11 @@ Algae.prototype.drawPath = function(path, cx, cy, step) {
         y += endPt[1]
         d = (d + 1) % 4;
     }
+    ctx.fillStyle = '#ff0000';
     ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx + x, cy - y, 3, 0, Math.PI * 2);
+    ctx.fill();
 }
 
 Algae.prototype.rotate = function(x, y, d) {
