@@ -6,6 +6,7 @@ function Algae(canvasId, inputId, buttonId) {
     this.step = 40;
     
     this.init();
+    this.redraw();
 }
 
 Algae.prototype.init = function() {
@@ -22,8 +23,24 @@ Algae.prototype.init = function() {
     };
 }
 
+Algae.prototype.buildString = function(n) {
+    var cur = 'AB';
+    var prev = 'A';
+    var cnt = 1;
+    while (cnt < n) {
+        var t = prev;
+        var prev = cur;
+        var cur = cur + t;
+        cnt++;
+    }
+    return cur;
+}
+
 Algae.prototype.redraw = function() {
     var s = this.input.value;
+    if (/^\d+$/.test(s)) {
+        s = this.buildString(parseInt(s));
+    }
     if (!/^[AB]+$/.test(s)) {
         alert("Input should consist of several 'A' or 'B' characters!");
         return;
@@ -32,7 +49,7 @@ Algae.prototype.redraw = function() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, this.w, this.h);
     
-    this.drawPath(s, Math.floor(this.w / 2), Math.floor(this.h / 2), this.step);
+    this.drawPath(s, this.w - this.step * 2, this.h - this.step, this.step);
 }
 
 Algae.prototype.drawPath = function(path, cx, cy, step) {
