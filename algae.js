@@ -49,7 +49,17 @@ Algae.prototype.redraw = function() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, this.w, this.h);
     
-    this.drawPath(s, this.w - this.step * 2, this.h - this.step, this.step);
+    var cx = this.w - this.step * 2;
+    var cy = this.h - this.step;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#88ff88';
+    ctx.beginPath();
+    ctx.moveTo(0, cy);
+    ctx.lineTo(this.w, cy);
+    ctx.moveTo(cx, 0);
+    ctx.lineTo(cx, this.h);
+    ctx.stroke();
+    this.drawPath(s, cx, cy, this.step);
 }
 
 Algae.prototype.drawPath = function(path, cx, cy, step) {
